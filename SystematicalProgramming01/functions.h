@@ -6,7 +6,9 @@
 #include <random>
 #include <chrono>
 #include "RandInt.h";
-
+#include <fstream>;
+#include <sstream>
+#include <iterator>
 
 using std::random_device;
 using std::mt19937;
@@ -23,38 +25,59 @@ using std::setw;
 using std::setprecision;
 using std::sort;
 using std::fixed;
+using std::ifstream;
+using std::getline;
+using std::istringstream;
+using std::stringstream;
+
+
+const char FILENAME1[] = "studentai10000.txt";
+const char FILENAME2[] = "studentai100000.txt";
+const char FILENAME3[] = "studentai1000000.txt";
 
 class Student {
-	string name, surname;
-	int hwGrade;
-	double exam, gradeAvg, gradeMed;
-	vector<int> hwGrades;
+	string pfName, pfSurname;
+	int pfHomeworkGrade;
+	double pfExam, pfGradeAvg, pfGradeMed;
+	vector<int> pfHomeworkGrades;
 public:
 	Student();
 	~Student();
-	Student(const Student& st);
+	Student(const Student&);
 
 	Student& operator=(const Student&);
-	friend istream& operator >> (istream& input, Student& in);
-	friend ostream& operator << (ostream& output, const vector <Student>& st);
+	friend istream& operator >> (istream&, Student&);
+	friend ifstream& operator >> (ifstream&, vector<Student>&);
+	friend ostream& operator << (ostream&, const vector <Student>&);
 
-	friend void createStudent(vector<Student>&); // Had deleted adress name
+	friend void CreateStudent(vector<Student>&);
+	friend void FileInput(vector<Student>&);
+	
+	void SetHwGrades();
+	void SetHwGrades(vector<string>);
+	void SetHwGradesRnd();
 
-	void setHwGrades();
-	void setHwGradesRnd();
-	double average(vector <int>);
-	double median(vector <int>);
-	void setGrade();
-	void setMedian();
+	double Average(vector <int>);
+	double Median(vector <int>);
 
-	string getName(vector <Student>, int);
-	string getSurname(vector <Student>, int);
-	double getGrade(vector <Student>, int);
-	double getMedian(vector <Student>, int);
+	void SetName(string);
+	void SetSurname(string);
+	void SetExam(int);
+	void SetGrade();
+	void SetMedian();
 
-	friend void showMenu(vector <Student>);
+	string GetName(vector <Student>, int);
+	string GetName() const;
+	string GetSurname(vector <Student>, int);
+	double GetGrade(vector <Student>, int);
+	double GetMedian(vector <Student>, int);
+
+	friend void ShowMenu(vector <Student>);
+	
 };
 
-double finalScore(double, double);
+double CalcFinalScore(double, double);
 
-void menuText();
+void MenuText();
+
+int ValidInput();

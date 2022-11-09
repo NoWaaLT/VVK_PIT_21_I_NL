@@ -2,7 +2,7 @@
 
 int main()
 {
-	vector<Student> records;
-	showMenu(records);
+	vector<Student> lRecords;
+	ShowMenu(lRecords);
 	system("pause");
 }
