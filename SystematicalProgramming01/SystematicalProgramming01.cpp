@@ -1,9 +1,23 @@
-#include "functions.h"
-
+#include "vectorEnv.h"
+#include "dequeEnv.h"
+#include "listEnv.h"
 int main()
 {
-	RandInt ORnd1{ 0, MAX_GRADE };
-	vector<Student> lRecords;
-	ShowMenu(lRecords);
-	system("pause");
+	int lTempVar = PreMenu();
+
+	if (lTempVar == 1) {
+		vector<Student> lRecords;
+		ShowMenu(lRecords);
+	}
+	if (lTempVar == 2) {
+		deque<Student> lRecords2;
+		ShowMenu(lRecords2);
+	}
+	else if (lTempVar == 3) {
+		list<Student> lRecords3;
+		ShowMenu(lRecords3);
+	}
+	else {
+		system("exit");
+	}
 }

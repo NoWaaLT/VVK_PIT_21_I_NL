@@ -24,6 +24,7 @@
     <ProjectGuid>{225254c3-a266-4170-a817-f514896000aa}</ProjectGuid>
     <RootNamespace>SystematicalProgramming01</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>VVK_Systematic_Programming_1SD</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,11 +128,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="functions.cpp" />
+    <ClCompile Include="dequeEnv.cpp" />
+    <ClCompile Include="listEnv.cpp" />
+    <ClCompile Include="vectorEnv.cpp" />
     <ClCompile Include="SystematicalProgramming01.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="functions.h" />
+    <ClInclude Include="dequeEnv.h" />
+    <ClInclude Include="listEnv.h" />
+    <ClInclude Include="vectorEnv.h" />
     <ClInclude Include="RandInt.h" />
   </ItemGroup>
   <ItemGroup>
