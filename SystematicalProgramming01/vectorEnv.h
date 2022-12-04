@@ -8,6 +8,8 @@
 #include <fstream>
 #include <sstream>
 #include <iterator>
+#include <cstring>
+#include <stdio.h>
 
 using std::cout;
 using std::cin;
@@ -59,7 +61,7 @@ public:
 
 	friend void CreateStudent(vector<Student>&);										// I removed reference sign after Student
 	friend void FileInput(vector<Student>&);
-	
+
 	void SetHwGrades();
 	void SetHwGrades(vector<string>);
 	void SetHwGradesRnd();
@@ -85,9 +87,11 @@ public:
 
 	friend void ShowMenu(vector <Student>);
 
-	friend void SortStudentsByFinalGrade(vector<Student>&, vector<Student>&, vector<Student>);
+	friend void SortStudentsByFinalGradeFirstStr(vector<Student>&, vector<Student>&, vector<Student>);
+	friend void SortStudentsByFinalGradeSecondStr(vector<Student>&);
 
-	friend void CreateSortedStudentsFiles(vector<Student>);
+	friend void CreateSortedStudentsFilesFirstStr(vector<Student>);
+	friend void CreateSortedStudentsFilesSecondStr(vector<Student>&, vector<Student>&);
 };
 
 

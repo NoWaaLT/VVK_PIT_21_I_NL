@@ -20,6 +20,13 @@ Taip pat galima tuos įrašus sukurti, generuot atsitiktinius studentus, bei jų
 Studentus galima skirtyti į geručius ir blogučius vertinant jų galutinį pažymį.
 Galima tuos studetus išvesti į atkirus .txt file'us.
 Pridėta galimybė stebėti kiek laiko užtruko procesai.
+Pridėta galimybė naudoti deque ir list container'ius, taip kaip buvo su vectoriais.
+Yra galimybė patikrinti, kuris container'is kokiai funkcijai eikvoja mažiau laiko.
+
+V1.0
+
+Optimizuotas studentų skirtymas pagal pažymį (daugiau arba mažiau 5.0).
+Pridėta galimybė pasirinkti naudojama skirtymo strategiją (taupo kompiuterio atmintį).
 
 NAUDOJIMOSI INSTRUKCIJA:
 

@@ -22,8 +22,8 @@ ifstream& operator >> (ifstream& arg_ifstream, deque <Student>& arg_records) {
 		istringstream iss(lRows[1]);
 		for (string s; iss >> s; )									// splitting it to words 
 			lWords.push_back(s);
-		lWordsLength = lWords.size() - 1;
-		for (int i = 2; i < lRows.size(); i++) {						// i = 1 because first line useless in file
+		lWordsLength = lWords.size() - 1;					// Cia buvo - 1
+		for (int i = 1; i < lRows.size(); i++) {						// i = 1 because first line useless in file
 			istringstream iss(lRows[i]);								// Itarating threw strings vector and
 			for (string s; iss >> s; )									// splitting it to words 
 				lWords.push_back(s);
@@ -269,6 +269,15 @@ void ShowMenu(deque <Student> arg_records) {
 		break;
 	}
 	case 6: {
+		system("cls");
+		deque<Student> vargsiukai2;
+		SortStudentsByFinalGradeSecondStr(arg_records);
+		CreateSortedStudentsFilesSecondStr(vargsiukai2, arg_records);
+		ShowMenu(arg_records);
+		break;
+	}
+
+	case 7: {
 		system("exit");
 		break;
 	}
@@ -314,4 +323,71 @@ void CreateSortedStudentsFiles(deque<Student> arg_records) {
 
 	cout << "Studentu irasymas i faila uztruko: " << time1.elapsed() << "s\n";
 
+}
+
+void CreateSortedStudentsFilesSecondStr(deque<Student>& arg_vargsiukai, deque<Student>& arg_records) {
+	Timer time1;
+	int badStudents = 0;
+	auto iter = arg_records.begin();
+	while (iter->GetFinalGrade() < 5.0 && iter != arg_records.end()) {
+		badStudents++;
+		iter++;
+	}
+	int lSumOfStudents = arg_records.size();
+	string lFileName = "";
+	if (lSumOfStudents < 999) {
+		lFileName = "studentai.txt";
+	}
+	else if (999 <= lSumOfStudents && lSumOfStudents < 9999) {
+		lFileName = "studentai1000.txt";
+	}
+	else if (9999 <= lSumOfStudents && lSumOfStudents < 99999) {
+		lFileName = "studentai10000.txt";
+	}
+
+	else if (99999 <= lSumOfStudents && lSumOfStudents < 999999) {
+		lFileName = "studentai100000.txt";
+	}
+	else if (999999 <= lSumOfStudents && lSumOfStudents < 9999999) {
+		lFileName = "studentai1000000.txt";
+	}
+	else {
+		lFileName = "studentai10000000.txt";
+	}
+
+	//copy(arg_records.begin(), arg_records.end(), std::back_inserter(arg_vargsiukai));
+	arg_vargsiukai.assign(arg_records.begin(), iter);
+	arg_records.erase(arg_records.begin(), arg_records.begin() + badStudents);
+
+	ofstream of1("vargsiukai.txt");
+	of1 << left << setw(14) << PAVARDE << left << setw(14) << VARDAS << "Galutinis(Vid.)" << endl;
+	of1 << "--------------------------------------------------------" << endl;
+
+
+	ofstream of2(lFileName);
+	of2 << left << setw(14) << PAVARDE << left << setw(14) << VARDAS << "Galutinis(Vid.)" << endl;
+	of2 << "--------------------------------------------------------" << endl;
+
+	for (int i = 0; i < arg_vargsiukai.size(); i++) {
+		of1 << left << setw(14) << arg_vargsiukai[i].GetSurname() << left << setw(14) <<
+			arg_vargsiukai[i].GetName() << setprecision(2) << fixed << arg_vargsiukai[i].GetFinalGrade() << endl;
+	}
+
+	//arg_records.erase(arg_records.begin(), arg_records.begin() + badStudents);
+
+	for (int i = 0; i < arg_records.size(); i++) {
+		of2 << left << setw(14) << arg_records[i].GetSurname() << left << setw(14) <<
+			arg_records[i].GetName() << setprecision(2) << fixed << arg_records[i].GetFinalGrade() << endl;
+	}
+
+	cout << "Studentu irasymas i faila uztruko: " << time1.elapsed() << "s\n";
+}
+
+void SortStudentsByFinalGradeSecondStr(deque<Student>& arg_records) {
+	Timer time1;
+	sort(arg_records.begin(), arg_records.end(), [](const Student& lhs, const Student& rhs) {
+		return lhs.GetFinalGrade() < rhs.GetFinalGrade();
+		});
+
+	cout << "Studentu skirstymas pagal pazymi uztruko: " << time1.elapsed() << "s\n";
 }
