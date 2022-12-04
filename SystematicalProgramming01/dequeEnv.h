@@ -12,5 +12,6 @@ void FileInput(deque<Student>&);
 void ShowMenu(deque <Student>);
 
 void SortStudentsByFinalGrade(deque<Student>&, deque<Student>&, deque<Student>);
-
+void SortStudentsByFinalGradeSecondStr(deque<Student>&);
 void CreateSortedStudentsFiles(deque<Student>);
+void CreateSortedStudentsFilesSecondStr(deque<Student>&, deque<Student>&);

@@ -33,7 +33,6 @@ Student& Student::operator=(const Student& arg_st1) {
 
 	return *this;
 }
-
 istream& operator >> (istream& arg_input, Student& arg_st1) {
 	cout << "Iveskite studento varda:\n";
 	arg_input >> arg_st1.pfName;
@@ -61,53 +60,6 @@ istream& operator >> (istream& arg_input, Student& arg_st1) {
 	system("cls");
 	return arg_input;
 }
-//ostream& operator << (ostream& arg_output, const vector <Student>& arg_st1) {
-//
-//	int lChoise;
-//
-//	cout << "Pasirinkite: " << endl;
-//	cout << "1. Galutinis pazymis pagal vidurki" << endl;
-//	cout << "2. Galutinis pazymis pagal mediana" << endl;
-//	cout << "3. Surykiuoti ir rodyti visa informacija" << endl;
-//
-//	do {
-//		lChoise = ValidInput();
-//	} while (lChoise > 3 || lChoise < 1);
-//
-//	if (lChoise == 1) {
-//		cout << left << setw(14) << VARDAS << left << setw(14) << PAVARDE << "Galutinis(Vid.)" << endl;
-//		cout << "--------------------------------------------------------" << endl;
-//		
-//		for (int i = 0; i < arg_st1.size(); i++) {
-//			arg_output << left << setw(14) << arg_st1[i].GetSurname() << left << setw(14) <<
-//				arg_st1[i].GetName() << setprecision(2) << fixed << CalcFinalScore(arg_st1[i].GetGrade(), arg_st1[i].GetExam()) << endl;
-//		}
-//	}
-//
-//	if (lChoise == 2) {
-//		cout << left << setw(14) << VARDAS << left << setw(14) << PAVARDE << "Galutinis(Med.)" << endl;
-//		cout << "--------------------------------------------------------" << endl;
-//		for (int i = 0; i < arg_st1.size(); i++) {
-//			arg_output << left << setw(14) << arg_st1[i].GetSurname() << left << setw(14) <<
-//				arg_st1[i].GetName() << setprecision(2) << fixed << CalcFinalScore(arg_st1[i].GetMedian(), arg_st1[i].GetExam()) << endl;
-//		}
-//	}
-//
-//	if (lChoise == 3) {
-//
-//		cout << left << setw(14) << VARDAS << left << setw(14) << PAVARDE << "Galutinis(Vid.)" << "Galutinis(Med.)" << endl;
-//		cout << "--------------------------------------------------------" << endl;
-//
-//		for (int i = 0; i < arg_st1.size(); i++) {
-//			arg_output << left << setw(14) << arg_st1[i].GetSurname() << left << setw(14) <<
-//				arg_st1[i].GetName() << std::right << setw(14) << setprecision(2) << fixed <<
-//				CalcFinalScore(arg_st1[i].GetGrade(), arg_st1[i].GetExam()) << std::right << setw(14) <<
-//				setprecision(2) << fixed << CalcFinalScore(arg_st1[i].GetMedian(), arg_st1[i].GetExam()) << endl;
-//		}
-//	}
-//
-//	return arg_output;
-//}
 ostream& operator << (ostream& arg_output, Student& arg_st1) {
 
 
@@ -152,7 +104,7 @@ ifstream& operator >> (ifstream& arg_ifstream, vector <Student>& arg_records) {
 		for (string s; iss >> s; )									// splitting it to words 
 			lWords.push_back(s);
 		lWordsLength = lWords.size() - 1;
-		for (int i = 2; i < lRows.size(); i++) {						// i = 1 because first line useless in file
+		for (int i = 1; i < lRows.size(); i++) {						// i = 1 because first line useless in file
 			istringstream iss(lRows[i]);								// Itarating threw strings vector and
 			for (string s; iss >> s; )									// splitting it to words 
 				lWords.push_back(s);
@@ -190,17 +142,6 @@ double Student::GetExam() const {
 double Student::GetFinalGrade() const {
 	return pfFinalGrade;
 }
-
-//void Student::SetName(string arg_name) {
-//	pfName = arg_name;
-//}
-//void Student::SetSurname(string arg_surname) {
-//	pfSurname = arg_surname;
-//}
-//void Student::SetExam(int arg_exam) {
-//	pfExam = arg_exam;
-//}
-
 void Student::SetHwGrades() {
 	do {
 		pfHomeworkGrade = ValidInput();
@@ -232,11 +173,9 @@ vector <int> SetHwGradesRnd(int arg_hwcount) {
 
 	return lGrades;
 }
-
 int SetGrade(vector<int> arg_grades) {
 	return Average(arg_grades);
 }
-
 double Average(vector <int> arg_grade) {
 	double lSum = 0.0;																			// Delete redundant methods
 	for (int i = 0; i < arg_grade.size(); i++) {
@@ -245,15 +184,6 @@ double Average(vector <int> arg_grade) {
 	lSum /= (double)arg_grade.size();
 	return lSum;
 }
-
-//double Student::Average(vector <int> arg_grade) {
-//	double lSum = 0.0;
-//	for (int i = 0; i < arg_grade.size(); i++) {
-//		lSum += arg_grade[i];
-//	}
-//	lSum /= (double)arg_grade.size();
-//	return lSum;
-//}
 double Student::Median(vector <int> arg_grade) {
 	if (arg_grade.size() == 1) {
 		return arg_grade[0];
@@ -271,19 +201,15 @@ double Student::Median(vector <int> arg_grade) {
 			return arg_grade[lMid];
 	}
 }
-
 void Student::SetName(istream& inStream) {
 	inStream >> pfName;
 }
-
 void Student::SetName(string arg_name) {
 	pfName = arg_name;
 }
-
 void Student::SetSurname(istream& inStream) {
 	inStream >> pfSurname;
 }
-
 void Student::SetSurname(string arg_surname) {
 	pfSurname = arg_surname;
 }
@@ -296,11 +222,9 @@ void Student::SetGrade() {
 void Student::SetMedian() {
 	pfGradeMed = Median(pfHomeworkGrades);
 }
-
 void Student::SetFinalGrade() {
 	pfFinalGrade = CalcFinalScore(pfGradeAvg, pfExam);
 }
-
 double CalcFinalScore(double arg_average, double arg_exam) {
 	return (arg_average * 0.4) + (arg_exam * 0.6);
 }
@@ -347,15 +271,12 @@ void CreateStudent(vector<Student>& arg_records) {
 	}
 	}
 }
-
 void CreateFile(int arg_count) {
 	Timer time1;
 
 	ofstream of("studentai" + to_string(arg_count) + ".txt");
 	vector<string> lRndStudents;
 
-	//RandInt ORnd{ 1, 20 };
-	//int lHWCount = ORnd();
 	int lHWCount = 15;
 
 	of << VARDAS << setw(27) << PAVARDE << setw(27);
@@ -379,7 +300,6 @@ void CreateFile(int arg_count) {
 		if (i >= 999 && i < 9999)
 			of << VARDAS << i + 1 << setw(23) << PAVARDE << i + 1 << setw(24);
 
-
 		if (i >= 9999 && i < 99999)
 			of << VARDAS << i + 1 << setw(22) << PAVARDE << i + 1 << setw(23);
 
@@ -400,14 +320,13 @@ void CreateFile(int arg_count) {
 
 	cout << "Failo sukurimas uztruko : " << time1.elapsed() << endl;
 }
-
-void CreateSortedStudentsFiles(vector<Student> arg_records) {
+void CreateSortedStudentsFilesFirstStr(vector<Student> arg_records) {
 	Timer time1;
 	ofstream of1("vargsiukai.txt");
 	of1 << left << setw(14) << PAVARDE << left << setw(14) << VARDAS << "Galutinis(Vid.)" << endl;
 	of1 << "--------------------------------------------------------" << endl;
 
-	ofstream of2("kietiakai.txt");																					// <-----------------------
+	ofstream of2("kietiakai.txt");
 	of2 << left << setw(14) << PAVARDE << left << setw(14) << VARDAS << "Galutinis(Vid.)" << endl;
 	of2 << "--------------------------------------------------------" << endl;
 
@@ -426,10 +345,67 @@ void CreateSortedStudentsFiles(vector<Student> arg_records) {
 
 }
 
+void CreateSortedStudentsFilesSecondStr(vector<Student>& arg_vargsiukai, vector<Student>& arg_records) {
+	Timer time1;
+	int badStudents = 0;
+	auto iter = arg_records.begin();
+	while (iter->pfFinalGrade < 5.0 && iter != arg_records.end()) {
+		badStudents++;
+		iter++;
+	}
+	int lSumOfStudents = arg_records.size();
+	string lFileName = "";
+	if (lSumOfStudents < 999) {
+		lFileName = "studentai.txt";
+	}
+	else if (999 <= lSumOfStudents && lSumOfStudents < 9999) {
+		lFileName = "studentai1000.txt";
+	}
+	else if (9999 <= lSumOfStudents && lSumOfStudents < 99999) {
+		lFileName = "studentai10000.txt";
+	}
+
+	else if (99999 <= lSumOfStudents && lSumOfStudents < 999999) {
+		lFileName = "studentai100000.txt";
+	}
+	else if (999999 <= lSumOfStudents && lSumOfStudents < 9999999) {
+		lFileName = "studentai1000000.txt";
+	}
+	else {
+		lFileName = "studentai10000000.txt";
+	}
+
+	arg_vargsiukai.assign(arg_records.begin(), iter);
+
+	//copy(arg_records.begin(), arg_records.end(), std::back_inserter(arg_vargsiukai)); //
+
+	arg_records.erase(arg_records.begin(), arg_records.begin() + badStudents);
+
+	ofstream of1("vargsiukai.txt");
+	of1 << left << setw(14) << PAVARDE << left << setw(14) << VARDAS << "Galutinis(Vid.)" << endl;
+	of1 << "--------------------------------------------------------" << endl;
+
+
+	ofstream of2(lFileName);
+	of2 << left << setw(14) << PAVARDE << left << setw(14) << VARDAS << "Galutinis(Vid.)" << endl;
+	of2 << "--------------------------------------------------------" << endl;
+
+	for (int i = 0; i < arg_vargsiukai.size(); i++) {
+		of1 << left << setw(14) << arg_vargsiukai[i].pfSurname << left << setw(14) <<
+			arg_vargsiukai[i].pfName << setprecision(2) << fixed << arg_vargsiukai[i].pfFinalGrade << endl;
+	}
+	for (int i = 0; i < arg_records.size(); i++) {
+		of2 << left << setw(14) << arg_records[i].pfSurname << left << setw(14) <<
+			arg_records[i].pfName << setprecision(2) << fixed << arg_records[i].pfFinalGrade << endl;
+	}
+
+	cout << "Studentu irasymas i faila uztruko: " << time1.elapsed() << "s\n";
+}
+
 int PreMenu() {
 	cout << "***********************************************\n";
 	cout << "*     Studentu pazymiu vertinimo programa     *\n";
-	cout << "*  Pasirinkite kokį STL conteineri naudosite  *\n";
+	cout << "*  Pasirinkite koki STL conteineri naudosite  *\n";
 	cout << "***********************************************\n";
 	cout << "* 1. Vector                                   *\n";
 	cout << "* 2. Deque                                    *\n";
@@ -461,9 +437,9 @@ void MenuText() {
 	cout << "* 2. Rodyti studentu irasus                   *\n";
 	cout << "* 3. Nuskenuoti studentu irasus is file       *\n";
 	cout << "* 4. Generuoti atsitiktinius studentus        *\n";
-	cout << "* 5. Skirstyti pagal galutini pazymi          *\n";
-	cout << "* 6. Uzdaryti programa                        *\n";
-	cout << "*                                             *\n";
+	cout << "* 5. 1 strategija - studenetu rusiavimas      *\n";
+	cout << "* 6. 2 strategija - studenetu rusiavimas      *\n";
+	cout << "* 7. Uzdaryti programa                        *\n";
 	cout << "***********************************************\n";
 }
 
@@ -493,13 +469,11 @@ void ShowMenu(vector <Student> arg_records) {
 	}
 
 	case 2: {
-		cout << "Vyksta rusiavimas" << endl;
-		sort(arg_records.begin(), arg_records.end(), [](const Student& lhs, const Student& rhs) { return lhs.GetName() < rhs.GetName(); });	// Sorts vector by name alphabetically
 
 		cout << "Pasirinkite: " << endl;
 		cout << "1. Galutinis pazymis pagal vidurki" << endl;
 		cout << "2. Galutinis pazymis pagal mediana" << endl;
-		cout << "3. Surykiuoti ir rodyti visa informacija" << endl;
+		cout << "3. Rikiuoti pagal varda ir rodyti vid./med." << endl;
 
 		do {
 			lChoise = ValidInput();
@@ -522,7 +496,8 @@ void ShowMenu(vector <Student> arg_records) {
 		}
 
 		if (lChoise == 3) {
-
+			cout << "Vyksta rusiavimas" << endl;
+			sort(arg_records.begin(), arg_records.end(), [](const Student& lhs, const Student& rhs) { return lhs.GetName() < rhs.GetName(); });
 			cout << left << setw(14) << VARDAS << left << setw(14) << PAVARDE << "Galutinis(Vid.)" << "Galutinis(Med.)" << endl;
 			cout << "--------------------------------------------------------" << endl;
 
@@ -594,12 +569,22 @@ void ShowMenu(vector <Student> arg_records) {
 		system("cls");
 		vector<Student> vargsiukai;
 		vector<Student> kietiakai;
-		SortStudentsByFinalGrade(vargsiukai, kietiakai, arg_records);
-		CreateSortedStudentsFiles(arg_records);
+		SortStudentsByFinalGradeFirstStr(vargsiukai, kietiakai, arg_records);
+		CreateSortedStudentsFilesFirstStr(arg_records);
 		ShowMenu(arg_records);
 		break;
 	}
+
 	case 6: {
+		system("cls");
+		vector<Student> vargsiukai2;
+		SortStudentsByFinalGradeSecondStr(arg_records);
+		CreateSortedStudentsFilesSecondStr(vargsiukai2, arg_records);
+		ShowMenu(arg_records);
+
+		break;
+	}
+	case 7: {
 		system("exit");
 		break;
 	}
@@ -660,7 +645,7 @@ void FileInput(vector<Student>& arg_records) {
 	}
 }
 
-void SortStudentsByFinalGrade(vector<Student>& arg_vargsiukai, vector<Student>& arg_kietiakai, vector<Student> arg_records) {
+void SortStudentsByFinalGradeFirstStr(vector<Student>& arg_vargsiukai, vector<Student>& arg_kietiakai, vector<Student> arg_records) {
 	Timer time1;
 	for (int i = 0; i < arg_records.size(); i++) {
 		if (arg_records[i].pfFinalGrade < 5.00)
@@ -670,6 +655,14 @@ void SortStudentsByFinalGrade(vector<Student>& arg_vargsiukai, vector<Student>& 
 	}
 
 	cout << "Studentu skirstymas i vectorius pagal pazymi uztruko: " << time1.elapsed() << "s\n";
+}
+
+void SortStudentsByFinalGradeSecondStr(vector<Student>& arg_records) {
+	Timer time1;
+	sort(arg_records.begin(), arg_records.end(), [](const Student& lhs, const Student& rhs) {
+		return lhs.GetFinalGrade() < rhs.GetFinalGrade();
+		});
+	cout << "Studentu skirstymas pagal pazymi uztruko: " << time1.elapsed() << "s\n";
 }
 
 int ValidInput()
